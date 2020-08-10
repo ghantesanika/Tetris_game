@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid=document.querySelector('.grid')
     const GRID_WIDTH = 10
     const GRID_HEIGHT = 20
+    let currentPosition=4
+    let squares = Array.from(grid.querySelectorAll('div'))
 
     const lTetromino = [
         [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, 2],
@@ -43,6 +45,48 @@ document.addEventListener('DOMContentLoaded', () => {
       let currentRotation=0
       let current = theTetrominoes[random][currentRotation]
 
+      function draw() {
+        current.forEach(index => {
+          squares[currentPosition + index].classList.add('block')
+          })
+      }
+
+      function undraw() {
+        current.forEach(index => {
+          squares[currentPosition + index].classList.remove('block')
+          })
+      }
+    
+      function moveDown() {
+        undraw()
+        currentPosition = currentPosition += width
+        draw()
+        freeze()
+      }
+
+      function moveRight() {
+        undraw()
+        const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
+        if (!isAtRightEdge) currentPosition += 1
+        if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+          currentPosition -= 1
+        }
+        draw()
+      }
+
+      function moveleft() {
+        undraw()
+        const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
+        if (!isAtLeftEdge) currentPosition -= 1
+        if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+          currentPosition += 1
+        }
+        draw()
+      }
+    
+             
+
       
+
 
 })
