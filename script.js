@@ -5,6 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPosition=4
     let squares = Array.from(grid.querySelectorAll('div'))
 
+    function control(e) {
+        if (e.keyCode === 39){
+          moveRight()
+        }else if (e.keyCode === 38){
+         rotate()
+        }else if (e.keyCode === 37){
+          moveLeft()
+        }else if (e.keyCode === 40){
+          moveDown()
+        }  
+    } 
+      
+    document.addEventListener('keyup',control)
+    
     const lTetromino = [
         [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, 2],
         [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2 + 2],
@@ -74,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
       }
 
-      function moveleft() {
+      function moveLeft() {
         undraw()
         const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
         if (!isAtLeftEdge) currentPosition -= 1
@@ -84,7 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
       }
     
-             
+      function rotate() {
+        undraw()
+        currentRotation++
+        if (currentRotation === current.length) {
+          currentRotation = 0
+        }
+        current = theTetrominoes[random][currentRotation]
+        draw()
+      }
+    
+      draw();
 
       
 
