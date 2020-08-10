@@ -38,4 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
         [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH + 3]
       ]
       const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+
+      let random = Math.floor(Math.random() * theTetrominoes.length)
+      let currentRotation=0
+      let current = theTetrominoes[random][currentRotation]
+
+      
+
 })
